@@ -1,10 +1,12 @@
-﻿using System;
+﻿using CommonLayer;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BussinessLayer
 {
-    interface IUserBL
+   public interface IUserBL
     {
+        bool SampleUserApi(User user );
     }
 }
