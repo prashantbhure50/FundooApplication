@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CommonLayer.DataBase
 {
-    class EmailModle
+  public  class EmailModle
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

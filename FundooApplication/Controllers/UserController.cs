@@ -1,5 +1,6 @@
 ﻿using BussinessLayer;
 using CommonLayer;
+using CommonLayer.DataBase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
@@ -31,6 +32,11 @@ namespace FundooApplication.Controllers
             {
                 return this.BadRequest(new { success = false, message = e.Message });
             }
+        }
+        [HttpPost("login")]
+        public IActionResult Login(EmailModle user)
+        {
+            return Ok();
         }
 
         

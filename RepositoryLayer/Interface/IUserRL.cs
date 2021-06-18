@@ -9,5 +9,6 @@ namespace RepositoryLayer
     {
         bool SampleUserApi(Users user);
         Users AddUser(Users user);
+       string Login(string email, string password);
     }
 }
