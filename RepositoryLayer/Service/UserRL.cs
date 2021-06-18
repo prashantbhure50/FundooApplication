@@ -50,7 +50,7 @@ namespace RepositoryLayer
             if (result == null)
                 return null;
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenKey = Encoding.ASCII.GetBytes("hello");
+            var tokenKey = Encoding.ASCII.GetBytes("hellosdjfgbbsdkjjgbvwbvwruvbwrouvbwrouvwrouvbworuou");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

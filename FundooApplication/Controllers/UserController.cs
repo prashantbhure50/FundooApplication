@@ -1,6 +1,7 @@
 ﻿using BussinessLayer;
 using CommonLayer;
 using CommonLayer.DataBase;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace FundooApplication.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -33,11 +35,14 @@ namespace FundooApplication.Controllers
                 return this.BadRequest(new { success = false, message = e.Message });
             }
         }
+        [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Login(EmailModle user)
+        public IActionResult LoginUser(EmailModle emailModel)
         {
-            var token = this.userBl.AuthenticateUser(user.Email);
-            return Ok();
+            var token = this.userBl.Login(emailModel.Email,emailModel.Password);
+            if (token == null)
+                return Unauthorized();
+            return this.Ok(new {token = token, success = true, message = "Token Generated Successfull" });
         }
 
         
