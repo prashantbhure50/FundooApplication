@@ -1,13 +1,15 @@
 ﻿using CommonLayer;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RepositoryLayer
 {
     public class UserRL:IUserRL
     {
-        IList<User> Users = new List<User>();
-        public bool SampleUserApi(User newUser)
+        IList<Users> Users = new List<Users>();
+        public bool SampleUserApi(Users newUser)
         {
             try
             {
@@ -25,6 +27,19 @@ namespace RepositoryLayer
             {
                 throw new Exception(e.Message);
             }
+        }
+
+
+         UserContext _userDbContext;
+        public UserRL(UserContext userDbContext)
+        {
+            _userDbContext = userDbContext;
+        }
+        public Users AddUser(Users newuser)
+        {
+            _userDbContext.User.Add(newuser);
+            _userDbContext.SaveChanges();
+            return newuser;
         }
     }
 }

@@ -2,6 +2,7 @@
 using CommonLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RepositoryLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +20,11 @@ namespace FundooApplication.Controllers
             this.userBl = userBl;
         }
         [HttpPost]
-        public ActionResult SampleUserApi(User user)
+        public ActionResult AddUser(Users user)
         {
             try {
-                bool res = this.userBl.SampleUserApi(user);
-                if (res == true)
-                {
-                    return this.Ok(new { success = true, message = "Registration Successful " });
-                }
-                else
-                {
-                    return this.Ok(new { success = false, message = "Registration UnSuccessful " });
-                }
+                 this.userBl.AddUser(user);
+                 return this.Ok(new { success = true, message = "Registration Successful " });             
                 }
 
             catch (Exception e)
@@ -38,6 +32,9 @@ namespace FundooApplication.Controllers
                 return this.BadRequest(new { success = false, message = e.Message });
             }
         }
+
+        
+
 
     }
 }

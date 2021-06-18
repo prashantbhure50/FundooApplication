@@ -1,17 +1,19 @@
 ﻿using CommonLayer;
 using RepositoryLayer;
+using RepositoryLayer.Interface;
 using System;
 
 namespace BussinessLayer
 {
     public class UserBL : IUserBL
     {
-        private IUserRL userRl;
+         IUserRL userRl;
+     
         public UserBL(IUserRL userRl)
         {
-            this.userRl = userRl ;
+            this.userRl = userRl;
         }
-        public bool SampleUserApi(User user)
+        public bool SampleUserApi(Users user)
         {
             try
             {
@@ -22,5 +24,12 @@ namespace BussinessLayer
                 throw new Exception(e.Message);
             }
         }
+        public Users AddUser(Users user)
+        {
+            this.userRl.AddUser(user);
+            return user;
+        }
+
+
     }
 }

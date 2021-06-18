@@ -7,6 +7,8 @@ namespace RepositoryLayer
 {
     public interface IUserRL
     {
-        bool SampleUserApi(User user);
+        bool SampleUserApi(Users user);
+        Users AddUser(Users user);
+
     }
 }
