@@ -30,6 +30,13 @@ namespace BussinessLayer
             return user;
         }
 
+        public string Login(string email, string password)
+        {
+          return   this.userRl.Login(email,password);
+        }
+
+       
+
 
     }
 }

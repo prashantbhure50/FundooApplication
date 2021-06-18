@@ -36,6 +36,7 @@ namespace FundooApplication.Controllers
         [HttpPost("login")]
         public IActionResult Login(EmailModle user)
         {
+            var token = this.userBl.AuthenticateUser(user.Email);
             return Ok();
         }
 
