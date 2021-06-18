@@ -28,9 +28,7 @@ namespace RepositoryLayer
                 throw new Exception(e.Message);
             }
         }
-
-
-         UserContext _userDbContext;
+        private UserContext _userDbContext;
         public UserRL(UserContext userDbContext)
         {
             _userDbContext = userDbContext;
@@ -41,5 +39,10 @@ namespace RepositoryLayer
             _userDbContext.SaveChanges();
             return newuser;
         }
+
+
+
+
+
     }
 }
