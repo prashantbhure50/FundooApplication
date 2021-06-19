@@ -44,9 +44,5 @@ namespace FundooApplication.Controllers
                 return Unauthorized();
             return this.Ok(new {token = token, success = true, message = "Token Generated Successfull" });
         }
-
-        
-
-
     }
 }

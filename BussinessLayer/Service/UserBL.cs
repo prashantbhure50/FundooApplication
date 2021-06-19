@@ -8,7 +8,6 @@ namespace BussinessLayer
     public class UserBL : IUserBL
     {
          IUserRL userRl;
-     
         public UserBL(IUserRL userRl)
         {
             this.userRl = userRl;
@@ -29,14 +28,9 @@ namespace BussinessLayer
             this.userRl.AddUser(user);
             return user;
         }
-
         public string Login(string email, string password)
         {
-          return   this.userRl.Login(email,password);
+            return this.userRl.Login(email, password);
         }
-
-       
-
-
     }
 }

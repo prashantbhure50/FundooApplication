@@ -43,14 +43,13 @@ namespace RepositoryLayer
             _userDbContext.SaveChanges();
             return newuser;
         }
-
         public string Login(string email, string password)
         {
            var result= _userDbContext.User.FirstOrDefault(u => u.Email == email && u.Password == password);
             if (result == null)
                 return null;
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenKey = Encoding.ASCII.GetBytes("hellosdjfgbbsdkjjgbvwbvwruvbwrouvbwrouvwrouvbworuou");
+            var tokenKey = Encoding.ASCII.GetBytes("HelloThisTokenIsGeneretedByMe");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
