@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 
@@ -63,5 +65,31 @@ namespace RepositoryLayer
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+        //public bool ForgotPassword(string email)
+        //{
+        //    var result = _userDbContext.User.FirstOrDefault(u => u.Email == email );
+        //    if (result == null)
+        //        return false;
+
+        //    MailMessage msg = new MailMessage();
+
+        //    msg.From = new MailAddress("Prashantbhure070@gmail.com");
+        //    msg.To.Add("receipientid");
+        //    msg.Subject = "test";
+        //    msg.Body = "Rest link";
+        //    msg.Priority = MailPriority.High;
+
+        //    SmtpClient client = new SmtpClient();
+
+        //    client.Credentials = new NetworkCredential("Prashantbhure070@gmail.com");
+        //    client.Host = "smtp.gmail.com";
+        //    client.Port = 587;
+        //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+        //    client.EnableSsl = true;
+        //    client.UseDefaultCredentials = true;
+
+        //    client.Send(msg);
+        //    return true;
+        //}
     }
 }
