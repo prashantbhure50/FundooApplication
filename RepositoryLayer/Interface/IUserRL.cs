@@ -1,4 +1,5 @@
 ﻿using CommonLayer;
+using CommonLayer.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,6 @@ namespace RepositoryLayer
         Users AddUser(Users user);
        string Login(string email, string password);
         //bool ForgotPassword(string email);
+     
     }
 }

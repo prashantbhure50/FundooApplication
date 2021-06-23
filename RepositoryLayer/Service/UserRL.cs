@@ -1,4 +1,5 @@
 ﻿using CommonLayer;
+using CommonLayer.DataBase;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.Interface;
 using System;
@@ -45,6 +46,7 @@ namespace RepositoryLayer
             _userDbContext.SaveChanges();
             return newuser;
         }
+       
         public string Login(string email, string password)
         {
            var result= _userDbContext.User.FirstOrDefault(u => u.Email == email && u.Password == password);
