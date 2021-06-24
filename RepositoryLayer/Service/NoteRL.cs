@@ -21,7 +21,7 @@ namespace RepositoryLayer.Service
         public Note GetNoteById(int id)
         {
             return _userDbContext.Notes
-                  .FirstOrDefault(e => e.UserId == id);
+                  .FirstOrDefault(e => e.NotesId == id);
         }
         public Note AddNotes(Note note)
         {
@@ -29,25 +29,35 @@ namespace RepositoryLayer.Service
             _userDbContext.SaveChanges();
             return note;
         }
-        public void DeleteNote(Note note)
+        public void DeleteNote(int id)
         {
-            _userDbContext.Notes.Remove(note);
-            _userDbContext.SaveChanges();
+            var result = _userDbContext.Notes.FirstOrDefault(e => e.NotesId == id);
+            if (result == null)
+            {
+                throw new Exception("No Note Exist");
+            }
+            else
+            {
+                _userDbContext.Notes.Remove(result);
+                _userDbContext.SaveChanges();
+           
+            }
+        }
+        public void UpdateNotes(Note note)
+        {
+            var result = _userDbContext.Notes.FirstOrDefault(n => n.NotesId == note.NotesId);
+            if (result == null)
+            {
+                throw new Exception("No such Notes Exist");
+            }
+            else
+            {
+                result.Title = note.Title;
+                result.Body = note.Body;
+                _userDbContext.SaveChanges();
+            }
         }
 
-        //public void UpdateNotes(Note note,Note entity)
-        //{
-        //    note.Title = entity.Title;
-        //    note.Body = entity.Body;
-        //    note.Reminder = entity.Reminder;
-        //    note.Colour = entity.Colour;
-        //    note.Archive = entity.Archive;
-        //    note.PinNote = entity.PinNote;
-        //    note.Trash = entity.Trash;
-        //    note.UserId = entity.UserId;
-        //    note.LabelId = entity.LabelId;
-        //    _userDbContext.SaveChanges();
-
-        //}
+      
     }
 }

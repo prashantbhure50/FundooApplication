@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace FundooApplication.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NotesController : ControllerBase
@@ -17,27 +16,22 @@ namespace FundooApplication.Controllers
         {
             this.noteBl = noteBl;
         }
-
-
         [HttpGet("GetAllNotes")]
         public IActionResult Get()
         {
             IEnumerable<Note> note = this.noteBl.GetAll();
             return Ok(note);
         }
-
-
         [HttpGet("GetNoteById")]
-        public IActionResult GetNoteById(int id)
+        public IActionResult GetNotes(Note notes)
         {
-            Note note = this.noteBl.GetNoteById(id);
+            Note note = this.noteBl.GetNoteById(notes.NotesId);
             if (note == null)
             {
                 return NotFound("The Note couldn't be found.");
             }
             return Ok(note);
         }
-
         [HttpPost]
         public ActionResult AddNotes(Note note)
         {
@@ -52,31 +46,32 @@ namespace FundooApplication.Controllers
                 return this.BadRequest(new { success = false, message = e.Message });
             }
         }
-
         [HttpDelete("DeleteNote")]
-        public IActionResult DeleteNote(int id)
+        public IActionResult DeleteNote(Note note)
         {
-            Note note = this.noteBl.GetNoteById(id);
-            if (note == null)
+            try
             {
-                return NotFound("The Employee record couldn't be found.");
+                this.noteBl.DeleteNote(note.NotesId);
+                return Ok(new { success = true, message = "Notes Deleted " });
             }
-            this.noteBl.DeleteNote(note);
-            return NoContent();
+            catch (Exception e)
+            {
+                return BadRequest(new { success = false, message = "Note is null" });
+            }
         }
-        //[HttpPut("UpdateNote")]
-        //public ActionResult UpdateNotes(Note note,Note entity)
-        //{
-        //    try
-        //    {
-        //        this.userBl.UpdateNotes(note,entity);
-        //        return this.Ok(new { success = true, message = "Notes Added Successful " });
-        //    }
+        [HttpPut("UpdateNote")]
+        public ActionResult UpdateNotes(Note note)
+        {
+            try
+            {
+                this.noteBl.UpdateNotes(note);
+                return Ok(new { success = true, message = "Notes Updates Successfully " });
 
-        //    catch (Exception e)
-        //    {
-        //        return this.BadRequest(new { success = false, message = e.Message });
-        //    }
-        //}
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { success = false, message = "Note is null" });
+            }
+        }
     }
 }

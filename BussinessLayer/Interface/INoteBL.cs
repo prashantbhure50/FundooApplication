@@ -10,7 +10,7 @@ namespace BussinessLayer.Interface
         IEnumerable<Note> GetAll();
         Note GetNoteById(int id);
         Note AddNotes(Note note);
-        void DeleteNote(Note note);
-        //void UpdateNotes(Note note, Note entity);
+        void DeleteNote(int id);
+        void UpdateNotes(Note note);
     }
 }

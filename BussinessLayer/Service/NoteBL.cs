@@ -28,15 +28,13 @@ namespace BussinessLayer.Service
             this.noteRl.AddNotes(Note);
             return Note;
         }
-
-        public void DeleteNote(Note note)
+        public void DeleteNote(int id)
         {
-            this.noteRl.DeleteNote(note);
+            this.noteRl.DeleteNote(id);
         }
-        //public void UpdateNotes (Note note, Note entity)
-        //{
-        //    this.noteRl.UpdateNotes( note, entity);
-
-        //}
+        public void UpdateNotes(Note note)
+        {
+            this.noteRl.UpdateNotes(note);
+        }
     }
 }
