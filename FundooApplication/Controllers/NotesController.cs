@@ -73,14 +73,13 @@ namespace FundooApplication.Controllers
                 return BadRequest(new { success = false, message = "Note is null" });
             }
         }
-       
-        [HttpPut("UpdateReminder")]
-        public ActionResult UpdateReminder(Note note)
+        [HttpPut("UpdatePin")]
+        public ActionResult UpdatePin(int id,string pinNote)
         {
             try
             {
-                this.noteBl.UpdateReminder(note);
-                return Ok(new { success = true, message = "Reminder Updated Successfully " });
+                this.noteBl.UpdatePin(id,pinNote);
+                return Ok(new { success = true, message = "Pin Updated Successfully " });
 
             }
             catch (Exception e)
@@ -88,6 +87,7 @@ namespace FundooApplication.Controllers
                 return BadRequest(new { success = false, message = "Note is null" });
             }
         }
+      
         [HttpPut("UpdateColour")]
         public ActionResult UpdateColour(Note note)
         {
