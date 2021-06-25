@@ -12,5 +12,10 @@ namespace BussinessLayer.Interface
         Note AddNotes(Note note);
         void DeleteNote(int id);
         void UpdateNotes(Note note);
+        void UpdatePin(int id, string pinNote);
+        void UpdateReminder(Note note);
+        void UpdateColour(Note note);
+        void UpdateTrash(Note note);
+        void UpdateArchive(Note note);
     }
 }
