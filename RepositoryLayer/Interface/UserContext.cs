@@ -17,24 +17,14 @@ namespace RepositoryLayer.Interface
         {
             //note and users
             modelBuilder.Entity<UserNotes>()
-                  .HasOne(n => n.Note)
-                  .WithMany(l => l.User_Notes)
-                  .HasForeignKey(nl => nl.NoteId);
-
-            modelBuilder.Entity<UserNotes>()
                 .HasOne(n => n.Label)
                 .WithMany(l => l.User_Notes)
                 .HasForeignKey(nl => nl.LabelId);
-
             //label and users
-         
-
             modelBuilder.Entity<LabelNotes>()
                .HasOne(n => n.Label)
                .WithMany(l => l.Label_Note)
                .HasForeignKey(nl => nl.LabelId);
-
-
         }
         public DbSet<Users> User { get; set; }
         public DbSet<Note> Notes { get; set; }

@@ -18,12 +18,12 @@ namespace CommonLayer.DataBase
         public string Archive { get; set; }
         public string PinNote { get; set; }
         public string Trash { get; set; }
-
+        public int LabelId { get; set; }
         public int UserId { get; set; }
         public Users user { get; set; }
 
         public List<LabelNotes> LabelNotes { get; set; }
-        public List<UserNotes> User_Notes { get; set; }
+    
 
     }
 }

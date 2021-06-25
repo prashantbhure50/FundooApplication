@@ -37,9 +37,9 @@ namespace BussinessLayer.Service
         {
             this.noteRl.UpdateNotes(note);
         }
-        public void UpdatePin(int id,string pinNote)
+        public void UpdatePin(Note note)
         {
-            this.noteRl.UpdatePin(id,pinNote);
+            this.noteRl.UpdatePin(note);
         }
         public void UpdateReminder(Note note)
         {

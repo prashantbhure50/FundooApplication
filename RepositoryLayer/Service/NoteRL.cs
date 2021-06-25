@@ -40,6 +40,7 @@ namespace RepositoryLayer.Service
                     note.Trash = notes.Trash;
                     note.PinNote= notes.Pin;
                     note.UserId = notes.UserId;
+                    note.LabelId = notes.LabelId;
                     _userDbContext.Notes.Add(note);
                     _userDbContext.SaveChanges();
                 }
@@ -88,18 +89,18 @@ namespace RepositoryLayer.Service
                 throw new Exception(e.Message);
             }
         }
-        public void UpdatePin(int id,string pinNote)
+        public void UpdatePin(Note note)
         {
             try
             {
-                var result = _userDbContext.Notes.FirstOrDefault(n => n.NotesId == id);
+                var result = _userDbContext.Notes.FirstOrDefault(n => n.NotesId == note.NotesId);
                 if (result == null)
                 {
                     throw new Exception("No such Pin Exist");
                 }
                 else
                 {
-                    result.PinNote = pinNote;
+                    result.PinNote = note.PinNote;
                     _userDbContext.SaveChanges();
                 }
             }

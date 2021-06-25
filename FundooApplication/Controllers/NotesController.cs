@@ -78,11 +78,11 @@ namespace FundooApplication.Controllers
             }
         }
         [HttpPut("UpdatePin")]
-        public ActionResult UpdatePin(int id,string pinNote)
+        public ActionResult UpdatePin(Note note)
         {
             try
             {
-                this.noteBl.UpdatePin(id,pinNote);
+                this.noteBl.UpdatePin(note);
                 return Ok(new { success = true, message = "Pin Updated Successfully " });
 
             }

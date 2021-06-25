@@ -11,7 +11,7 @@ namespace RepositoryLayer.Interface
         void AddNotes(ReqNote notes);
         void DeleteNote(int id);
         void UpdateNotes(Note note);
-        void UpdatePin(int id,string pinNote);
+        void UpdatePin(Note note);
         void UpdateReminder(Note note);
         void UpdateColour(Note note);
         void UpdateTrash(Note note);

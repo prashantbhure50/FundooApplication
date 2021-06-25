@@ -14,5 +14,6 @@ namespace CommonLayer.RequestModle
         public string Trash { get; set; }
         public string Pin { get; set; }
         public int UserId { get; set; }
+        public int LabelId { get; set; }
     }
 }
