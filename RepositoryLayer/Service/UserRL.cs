@@ -58,7 +58,8 @@ namespace RepositoryLayer
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Email, email)
+                   new Claim("Email",email),
+                    new Claim("UserID",result.UserId.ToString()),
 
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
@@ -72,7 +73,7 @@ namespace RepositoryLayer
             var result = _userDbContext.User.FirstOrDefault(e => e.Email == email);
             if (result == null)
                 return false;
-            MessageQueue billingQ = new MessageQueue();
+            //MessageQueue billingQ = new MessageQueue();
 
 
 

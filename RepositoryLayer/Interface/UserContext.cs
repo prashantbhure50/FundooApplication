@@ -27,10 +27,7 @@ namespace RepositoryLayer.Interface
                 .HasForeignKey(nl => nl.LabelId);
 
             //label and users
-            modelBuilder.Entity<LabelNotes>()
-              .HasOne(n => n.User)
-              .WithMany(l => l.Label_Notes)
-              .HasForeignKey(nl => nl.UserId);
+         
 
             modelBuilder.Entity<LabelNotes>()
                .HasOne(n => n.Label)

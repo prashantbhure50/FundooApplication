@@ -1,4 +1,5 @@
 ﻿using CommonLayer.DataBase;
+using CommonLayer.RequestModle;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,35 @@ namespace RepositoryLayer.Service
             return _userDbContext.Notes
                   .FirstOrDefault(e => e.NotesId == id);
         }
-        public Note AddNotes(Note note)
+        public void AddNotes(ReqNote notes)
         {
-            _userDbContext.Notes.Add(note);
-            _userDbContext.SaveChanges();
-            return note;
+            try
+            {
+                var user = _userDbContext.User.FirstOrDefault(u => u.UserId == notes.UserId);
+                if (user != null)
+                {
+                    Note note = new Note();
+                    note.Title = notes.Title;
+                    note.Body = notes.Body;
+                    note.Reminder = notes.Reminder;
+                    note.Colour = notes.Color;
+                    note.Archive = notes.Archive;
+                    note.Trash = notes.Trash;
+                    note.PinNote= notes.Pin;
+                    note.UserId = notes.UserId;
+                    _userDbContext.Notes.Add(note);
+                    _userDbContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("User id doesn't Exist.");
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         public void DeleteNote(int id)
         {

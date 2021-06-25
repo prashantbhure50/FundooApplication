@@ -1,9 +1,11 @@
 ﻿using BussinessLayer.Interface;
 using CommonLayer.DataBase;
+using CommonLayer.RequestModle;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FundooApplication.Controllers
 {
@@ -33,17 +35,19 @@ namespace FundooApplication.Controllers
             return Ok(note);
         }
         [HttpPost]
-        public ActionResult AddNotes(Note note)
+        public ActionResult AddNotes(ReqNote note)
         {
             try
             {
+                var id = User.Claims.FirstOrDefault(u => u.Type.ToString().Equals("UserID", StringComparison.OrdinalIgnoreCase));
+                note.UserId = Int32.Parse(id.Value);
                 this.noteBl.AddNotes(note);
                 return this.Ok(new { success = true, message = "Notes Added Successful " });
             }
 
             catch (Exception e)
             {
-                return this.BadRequest(new { success = false, message = e.Message });
+                return this.BadRequest(new { success = false, message = "No Such UserId Exist" });
             }
         }
         [HttpDelete("DeleteNote")]

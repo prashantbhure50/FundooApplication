@@ -46,11 +46,12 @@ namespace FundooApplication
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                    ValidateIssuerSigningKey = true,
-                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("hellosdjfgbbsdkjjgbvwbvwruvbwrouvbwrouvwrouvbworuou")),
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("HelloThisTokenIsGeneretedByMe")),
                    ValidateIssuer = false,
                    ValidateAudience = false
                 };
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

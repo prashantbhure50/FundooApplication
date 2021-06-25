@@ -1,7 +1,6 @@
 ﻿using CommonLayer.DataBase;
-using System;
+using CommonLayer.RequestModle;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BussinessLayer.Interface
 {
@@ -9,7 +8,7 @@ namespace BussinessLayer.Interface
     {
         IEnumerable<Note> GetAll();
         Note GetNoteById(int id);
-        Note AddNotes(Note note);
+        void AddNotes(ReqNote notes);
         void DeleteNote(int id);
         void UpdateNotes(Note note);
         void UpdatePin(int id, string pinNote);
