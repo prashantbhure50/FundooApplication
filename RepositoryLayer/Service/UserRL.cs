@@ -67,31 +67,18 @@ namespace RepositoryLayer
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-        //public bool ForgotPassword(string email)
-        //{
-        //    var result = _userDbContext.User.FirstOrDefault(u => u.Email == email );
-        //    if (result == null)
-        //        return false;
+        public bool ForgotPassword(string email)
+        {
+            var result = _userDbContext.User.FirstOrDefault(e => e.Email == email);
+            if (result == null)
+                return false;
+            MessageQueue billingQ = new MessageQueue();
 
-        //    MailMessage msg = new MailMessage();
 
-        //    msg.From = new MailAddress("Prashantbhure070@gmail.com");
-        //    msg.To.Add("receipientid");
-        //    msg.Subject = "test";
-        //    msg.Body = "Rest link";
-        //    msg.Priority = MailPriority.High;
 
-        //    SmtpClient client = new SmtpClient();
 
-        //    client.Credentials = new NetworkCredential("Prashantbhure070@gmail.com");
-        //    client.Host = "smtp.gmail.com";
-        //    client.Port = 587;
-        //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //    client.EnableSsl = true;
-        //    client.UseDefaultCredentials = true;
 
-        //    client.Send(msg);
-        //    return true;
-        //}
+            return true;
+        }
     }
 }

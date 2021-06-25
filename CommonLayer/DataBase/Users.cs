@@ -16,6 +16,5 @@ namespace CommonLayer
         public string Email { get; set; }
         public string Password { get; set; }
         public List<Note> Notes { get; set; }
-        public List<LabelNotes> Label_Notes { get; set; }
     }
 }
