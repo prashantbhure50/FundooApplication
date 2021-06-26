@@ -34,15 +34,23 @@ namespace FundooApplication.Controllers
             }
             return Ok(note);
         }
+        [Authorize]
         [HttpPost]
         public ActionResult AddNotes(ReqNote note)
         {
             try
             {
-                var id = User.Claims.FirstOrDefault(u => u.Type.ToString().Equals("UserID", StringComparison.OrdinalIgnoreCase));
+               var id = User.Claims.FirstOrDefault(u => u.Type.ToString().Equals("UserID", StringComparison.OrdinalIgnoreCase));
                 note.UserId = Int32.Parse(id.Value);
-                this.noteBl.AddNotes(note);
-                return this.Ok(new { success = true, message = "Notes Added Successful " });
+                if (note.UserId != null)
+                {
+                    this.noteBl.AddNotes(note);
+                    return this.Ok(new { success = true, message = "Notes Added Successful " });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, message = "No Such UserId Exist" });
+                }
             }
 
             catch (Exception e)

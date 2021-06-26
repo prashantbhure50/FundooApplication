@@ -39,8 +39,8 @@ namespace RepositoryLayer.Service
                     note.Archive = notes.Archive;
                     note.Trash = notes.Trash;
                     note.PinNote= notes.Pin;
-                    note.UserId = notes.UserId;
                     note.LabelId = notes.LabelId;
+                    note.UserId = notes.UserId;
                     _userDbContext.Notes.Add(note);
                     _userDbContext.SaveChanges();
                 }
