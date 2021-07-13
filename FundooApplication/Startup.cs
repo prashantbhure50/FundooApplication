@@ -9,9 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using NLog;
 using RepositoryLayer;
 using RepositoryLayer.Interface;
 using RepositoryLayer.Service;
+using System;
+using System.IO;
 using System.Text;
 
 namespace FundooApplication
@@ -20,6 +23,7 @@ namespace FundooApplication
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -29,11 +33,24 @@ namespace FundooApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<UserContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:UserDB"]));
+            services.AddSingleton<INlog, Nlog>();
+            
             services.AddControllers();
             services.AddTransient<IUserBL, UserBL>();
             services.AddTransient<IUserRL, UserRL>();
             services.AddTransient<INoteBL, NoteBL>();
             services.AddTransient<INoteRL, NoteRL>();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod()
+                                            ;
+                    });
+            });
 
             services.AddAuthentication(x =>
             {
@@ -65,6 +82,12 @@ namespace FundooApplication
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(builder => {
+               
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();
